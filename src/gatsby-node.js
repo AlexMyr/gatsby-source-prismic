@@ -16,6 +16,7 @@ export const sourceNodes = async (gatsby, pluginOptions) => {
     fetchLinks = [],
     lang = '*',
     shouldNormalizeImage = () => true,
+    forceRichTextFields = {},
   } = pluginOptions
 
   const { documents } = await fetchData({
@@ -41,6 +42,7 @@ export const sourceNodes = async (gatsby, pluginOptions) => {
           store,
           cache,
           shouldNormalizeImage,
+          forceRichTextFields,
         })
 
         return node

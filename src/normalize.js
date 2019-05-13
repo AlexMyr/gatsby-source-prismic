@@ -191,12 +191,15 @@ const normalizeGroupField = async args =>
 // of it. If the type is not supported or needs no normalizing, it is returned
 // as-is.
 export const normalizeField = async args => {
-  const { key, value, node, nodeHelpers, shouldNormalizeImage } = args
+  const { key, value, node, nodeHelpers, shouldNormalizeImage, forceRichTextFields } = args
   let { linkResolver, htmlSerializer } = args
   const { generateNodeId } = nodeHelpers
 
   linkResolver = linkResolver({ node, key, value })
   htmlSerializer = htmlSerializer({ node, key, value })
+
+  if (forceRichTextFields[node.type] && key === forceRichTextFields[node.type])
+    return normalizeRichTextField(value, linkResolver, htmlSerializer)
 
   if (isRichTextField(value))
     return normalizeRichTextField(value, linkResolver, htmlSerializer)

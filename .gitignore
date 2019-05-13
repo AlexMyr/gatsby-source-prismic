@@ -3,3 +3,4 @@
 /fetch.js
 /normalize.js
 node_modules
+.idea/*
